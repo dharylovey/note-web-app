@@ -1,5 +1,6 @@
 import express, { Express } from "express"
 import dotenv from "dotenv"
+import authRoutes from "@/routes/authRoutes"
 
 dotenv.config()
 const app: Express = express()
@@ -12,6 +13,8 @@ app.get("/", (req, res) => {
     health: true
   })
 })
+
+app.use("/api/auth", authRoutes)
 
 app.listen(PORT, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`)
