@@ -2,6 +2,7 @@ import express, { Express } from "express";
 import dotenv from "dotenv";
 import authRoutes from "@/routes/authRoutes";
 import { errorHandler } from "@/middleware/errorHandler";
+import { requestLogger } from "./middleware/requestLogger";
 
 dotenv.config();
 const app: Express = express();
@@ -16,7 +17,7 @@ app.get("/", (req, res) => {
 });
 
 // auth routes
-app.use("/api/auth", authRoutes);
+app.use("/api/auth", requestLogger, authRoutes);
 
 // error handler
 app.use(errorHandler);
