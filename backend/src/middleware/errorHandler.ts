@@ -1,20 +1,29 @@
-import { BAD_REQUEST } from "@/constant/httpStatusCode";
+import { BAD_REQUEST, SERVER_ERROR } from "@/constant/httpStatusCode";
 import { ErrorCode } from "@/constant/responseMessage";
 import { ErrorRequestHandler, Response } from "express";
 import z from "zod";
 
 const handleZodError = (res: Response, error: z.ZodError) => {
-  const errors = error.issues.map((issue) => ({
-    path: issue.path[0],
-    message: issue.message
+  const errors = error.issues.map((err) => ({
+    path: err.path.join("."),
+    message: ErrorCode.ZodValidationError
   }));
 
-  return res.status(BAD_REQUEST).json({ errors, success: false, message: error.message });
+  return res.status(BAD_REQUEST).json({
+    errors,
+    success: false,
+    message: ErrorCode.ZodValidationError
+  });
 };
 
 export const errorHandler: ErrorRequestHandler = (err, req, res) => {
-  console.log(`Path ${req.path} Error: ${err.message}`);
+  console.log(`PATH ${req.path}`, err);
   if (err instanceof Error) res.status(BAD_REQUEST).json({ success: false, message: err.message });
+
   if (err instanceof z.ZodError) handleZodError(res, err);
-  res.status(BAD_REQUEST).json({ message: ErrorCode.InternalServerError });
+
+  res.status(SERVER_ERROR).json({
+    success: false,
+    message: ErrorCode.InternalServerError
+  });
 };
