@@ -1,7 +1,8 @@
 const enum ErrorCode {
   InvalidEmail = "Invalid email",
+  InvalidPassword = "Invalid password",
   InvalidEmailOrPassword = "Invalid email or password",
-  UserExist = "User already exist",
+  UserAlreadyExist = "User already exist",
   UserNotFound = "User not found",
   InvalidVerificationCode = "Invalid or Expired verification code",
   PasswordNotMatch = "Password not match",
@@ -17,6 +18,7 @@ const enum ErrorCode {
 }
 
 const enum SuccessCode {
+  LoginSuccess = "Login successfully",
   UserCreated = "User created successfully",
   UserUpdated = "User updated successfully",
   UserDeleted = "User deleted successfully",

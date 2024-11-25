@@ -30,10 +30,13 @@ export const loginSchema = forgotPasswordSchema.extend({
 
 export const registerSchema = loginSchema
   .extend({
-    username: z.string(),
-    confirmPassword: z.string().min(8, { message: ZodSchemaError.MinPasswordLength }).max(20, {
-      message: ZodSchemaError.MaxPasswordLength
-    })
+    name: z.string(),
+    confirmPassword: z
+      .string()
+      .min(8, { message: ZodSchemaError.MinPasswordLength })
+      .max(20, {
+        message: ZodSchemaError.MaxPasswordLength
+      })
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: ErrorCode.PasswordNotMatch,
@@ -41,12 +44,17 @@ export const registerSchema = loginSchema
   });
 
 export const verifyEmailSchema = z.object({
-  verificationCode: z.string().min(6, { message: ZodSchemaError.MinMaxVerificationCodeLength }).max(6, {
-    message: ZodSchemaError.MinMaxVerificationCodeLength
-  })
+  verificationCode: z
+    .string()
+    .min(6, { message: ZodSchemaError.MinMaxVerificationCodeLength })
+    .max(6, {
+      message: ZodSchemaError.MinMaxVerificationCodeLength
+    })
 });
 
-export type UserSchema = z.infer<typeof registerSchema> | z.infer<typeof loginSchema>;
+export type UserSchema =
+  | z.infer<typeof registerSchema>
+  | z.infer<typeof loginSchema>;
 
 export type VerifyEmailSchema = z.infer<typeof verifyEmailSchema>;
-export type ForgotVerifyEmailSchema = z.infer<typeof forgotPasswordSchema>;
+export type ForgotPasswordSchema = z.infer<typeof forgotPasswordSchema>;

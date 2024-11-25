@@ -1,12 +1,17 @@
-import express, { Express } from "express";
+import express, { Express, urlencoded } from "express";
 import dotenv from "dotenv";
 import authRoutes from "@/routes/authRoutes";
 import { errorHandler } from "@/middleware/errorHandler";
 import { requestLogger } from "./middleware/requestLogger";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 const app: Express = express();
 const PORT = process.env.PORT || 3000;
+
+app.use(express.json());
+app.use(urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.status(200).json({
