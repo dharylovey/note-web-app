@@ -44,7 +44,7 @@ export const registerSchema = loginSchema
   });
 
 export const verifyEmailSchema = z.object({
-  verificationCode: z
+  code: z
     .string()
     .min(6, { message: ZodSchemaError.MinMaxVerificationCodeLength })
     .max(6, {
