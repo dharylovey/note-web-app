@@ -17,9 +17,6 @@ export const generateTokenSetCookie = async (res: Response, userId: string) => {
 
 export const generateCryptoToken = async () => crypto.randomUUID().toString();
 
-export const resetPasswordTokenExpires = async () =>
-  new Date(Date.now() + 1 * 60 * 60 * 1000);
+export const resetPasswordTokenExpires = async () => new Date(Date.now() + 1 * 60 * 60 * 1000);
 
-export const generateVerificationCode = () => {
-  return Math.floor(100000 + Math.random() * 900000).toString();
-};
+export const generateVerificationCode = () => Math.floor(100000 + Math.random() * 900000).toString();
