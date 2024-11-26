@@ -55,6 +55,14 @@ app.get("/", (req, res) => {
         health: true
     });
 });
+app.get("/health", (req, res) => {
+    res.status(200).send({
+        message: "Test endpoint",
+        author: "Dharyl Almora",
+        version: "1.0.0",
+        health: true
+    });
+});
 // auth routes
 app.use("/api/auth", requestLogger_1.requestLogger, authRoutes_1.default);
 // error handler
