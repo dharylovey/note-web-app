@@ -13,7 +13,6 @@ const authSchema_1 = require("../../zodSchema/authSchema");
 exports.register = (0, catchErrors_1.default)(async (req, res) => {
     const data = req.body;
     const validatedData = authSchema_1.registerSchema.safeParse(data);
-    console.log(validatedData);
     if (!validatedData.success)
         return res
             .status(httpStatusCode_1.BAD_REQUEST)

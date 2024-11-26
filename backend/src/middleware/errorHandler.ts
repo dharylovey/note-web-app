@@ -18,7 +18,8 @@ const handleZodError = (res: Response, error: z.ZodError) => {
 
 export const errorHandler: ErrorRequestHandler = (err, req, res) => {
   console.log(`PATH ${req.path}`, err);
-  if (err instanceof Error) res.status(BAD_REQUEST).json({ success: false, message: err.message });
+  if (err instanceof Error)
+    res.status(BAD_REQUEST).json({ success: false, message: err.message });
 
   if (err instanceof z.ZodError) handleZodError(res, err);
 
