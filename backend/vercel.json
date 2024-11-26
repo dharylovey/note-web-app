@@ -1,4 +1,16 @@
 {
   "version": 2,
-  "rewrites": [{ "source": "/(.*)", "destination": "/dist/build/server.js" }]
+  "builds": [
+    {
+      "src": "dist/build/server.js",
+      "use": "@vercel/node",
+      "config": { "includeFiles": ["dist/build/**"] }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "dist/build/server.js"
+    }
+  ]
 }
