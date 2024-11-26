@@ -11,7 +11,6 @@ export const register: RequestHandler = catchErrors(async (req, res) => {
   const data: UserSchema = req.body;
   const validatedData = registerSchema.safeParse(data);
 
-  console.log(validatedData);
   if (!validatedData.success)
     return res
       .status(BAD_REQUEST)
