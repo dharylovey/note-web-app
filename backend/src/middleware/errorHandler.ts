@@ -16,7 +16,7 @@ const handleZodError = (res: Response, error: z.ZodError) => {
   });
 };
 
-export const errorHandler: ErrorRequestHandler = (err, req, res) => {
+export const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
   console.log(`PATH ${req.path}`, err);
   if (!res.status) return;
   if (err instanceof Error)
@@ -28,4 +28,6 @@ export const errorHandler: ErrorRequestHandler = (err, req, res) => {
     success: false,
     message: ErrorCode.InternalServerError
   });
+
+  next();
 };
