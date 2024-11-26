@@ -1,4 +1,5 @@
 const enum ErrorCode {
+  InvalidData = "Invalid input data",
   InvalidEmail = "Invalid email",
   InvalidPassword = "Invalid password",
   InvalidEmailOrPassword = "Invalid email or password",
