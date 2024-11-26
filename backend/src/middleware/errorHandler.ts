@@ -1,6 +1,6 @@
 import { BAD_REQUEST, SERVER_ERROR } from "@/constant/httpStatusCode";
 import { ErrorCode } from "@/constant/responseMessage";
-import { ErrorRequestHandler, Response } from "express";
+import { Response, Request } from "express";
 import z from "zod";
 
 const handleZodError = (res: Response, error: z.ZodError) => {
@@ -16,7 +16,7 @@ const handleZodError = (res: Response, error: z.ZodError) => {
   });
 };
 
-export const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
+export const errorHandler = (err: Error, req: Request, res: Response) => {
   console.log(`PATH ${req.path}`, err);
   if (!res.status) return;
   if (err instanceof Error)
@@ -28,6 +28,4 @@ export const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
     success: false,
     message: ErrorCode.InternalServerError
   });
-
-  next();
 };
